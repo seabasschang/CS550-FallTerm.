@@ -3,6 +3,7 @@
 ## Ventre Program
 > Using core concepts from the term to create a class-based representation of the loveable Choate Jazz Band director Phil Ventre, who gives iconic quotes based on his mood. Allows interaction with "Ventre" through a typing game of variable difficulty that can change his mood and then show the user how they did by playing a song (Mueva Los Huesos, Machito, or Told You So) adjusted to reflect how well they did based on a tuning and rythym factor. 
 
+####Ventre Program Code:
 ```python
 import time
 import string
@@ -476,5 +477,601 @@ while loop:
     loop = True
 ```
 
+## Text-Based Game
+> A Pokémon RPG with both choose-your-own adventure and battle aspects. The game includes several different features, including error checking loops, lowercase functions to make input easier, and room for choice. I wanted to make the game a really fun visual experience, so I incorporated scrolling text, clearing functions, and both adapted and original ASCII art. The art and the control flow of the battle sequence were definitely the hardest to debug and get right, but I'm really satisfied with how it came out.I learned a lot about using loops, incorporating functions, and programming logic/control flow during the project, and I worked really hard to really understand how each aspect of the program really works.
+
+####Text-Based Game Code:
+
+```python
+import time
+import sys
+import os
+import random
+
+#########################################FUNCTIONS#################################################
+
+def health(x):
+	block = ''
+	for a in range(x):
+		block += '█'
+	return block
+#Returns string based on variable x that holds number of health blocks
+
+def bulbasaur(poke, hp, ehp, damage, edamage):
+	intro = ('WEEDLE♂		    Lv4\n')
+	intro0 = ('    hp: '+str(health(ehp))+'')
+	intro1 = (' ('+str(ehp)+'/22)\n')
+	intro2 = ('╚================================╝')
+	intro3 = ('\n   _,           /|')
+	intro4 = ("\n/     `.    /'_''`._	.__           ..:;:;::;:")
+	intro5 = ("\n\_    ./   _\,   (__)	\ ''._    ..--''' '' ' ' '''--. ")
+	intro6 = ("\n   `./-‘'/     `._./'   \.   '/' .   .'        '.   .`")
+	intro7 = ("\n'_.-'   \_    ./'	\ | /    /            \   '.; '")
+	intro8 = ("\n        `''-‘ 		,: /\ \.._\ __..===..__/_../ /`.")
+	intro9 = ('\n			'+str(poke)+'♂		    Lv3')
+	intro10 = ('\n			    hp: '+str(health(hp))+'')
+	intro11 = (' ('+str(hp)+'/22)\n')
+	intro12 = ('\n			╚================================╝')
+	#I'm really proud of this ASCII art. I drew it myself and it took me a long time.
+	for l in (intro, intro0, intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12):
+		sys.stdout.write(l)
+		sys.stdout.flush()
+		time.sleep(0)
+	#I left the sleep variable here (which controls the time between character printing) at zero 
+	#so it looks like the screen updates almost instantly.
+
+def charmander(poke, hp, ehp, damage, edamage):
+	intro = ('WEEDLE♂		    Lv4\n')
+	intro0 = ('    hp: '+str(health(ehp))+' ')
+	intro1 = (' ('+str(ehp)+'/22)\n')
+	intro2 = ('╚================================╝')
+	intro3 = ('\n   _,           /|            _----_           `. (')
+	intro4 = ("\n/     `.    /'_''`._	     .-__    '-.         ),'(,")
+	intro5 = ("\n\_    ./   _\,   (__)	     |0.      '\.      (. )).)")
+	intro6 = ("\n   `./-‘'/     `._./'        /_.      -  '\_.  /'`.(")
+	intro7 = ("\n'_.-'   \_    ./'	     '-._    ___      /   ,|")
+	intro8 = ("\n        `''-‘ 		         <\|'   --\  ..__ .'.")
+	intro9 = ('\n			'+str(poke)+'♂		    Lv3')
+	intro10 = ('\n			    hp: '+str(health(hp))+' ') 
+	intro11 = (' ('+str(hp)+'/22)\n')
+	intro12 = ('\n			╚================================╝')
+	#I'm really proud of this ASCII art. I drew it myself and it took me a long time.
+	for l in (intro, intro0, intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12):
+		sys.stdout.write(l)
+		sys.stdout.flush()
+		time.sleep(0)
+
+def fight():
+	intro12 = ('\n╔================================╗')
+	intro13 = ('\n	FIGHT		BAG')
+	intro14 = ('\n')
+	intro15 = ('\n	POKéMON		RUN')
+	intro16 = ('\n╚================================╝')
+
+	for l in (intro12, intro13, intro14, intro15, intro16):
+		sys.stdout.write(l)
+		sys.stdout.flush()
+		time.sleep(0.03)
+
+	choice_is_valid = False
+	while not choice_is_valid:
+		action = input('\nWhat will '+str(poke)+' do? ') 
+
+		choice_is_valid = True
+		if action.lower() == str('fight'):
+			input("\nLet's go, "+str(poke)+"! (Press Enter)")
+			os.system('clear')
+		else:
+			input('You must protect the professor! Fight! (Press Enter)')
+			choice_is_valid = False
+			os.system('clear')
+	#Contains a loop for error checking.
+
+def moveset1():
+	intro12 = ('\n╔================================╗')
+	intro13 = ('\n	TACKLE		GROWL')
+	intro14 = ('\n')
+	intro15 = ('\n	VINE WHIP	   ----')
+	intro16 = ('\n╚================================╝')
+
+	for l in (intro12, intro13, intro14, intro15, intro16):
+		sys.stdout.write(l)
+		sys.stdout.flush()
+		time.sleep(0.03)
+
+	choice_is_valid = False
+	while not choice_is_valid:
+		damage = 0
+		action = input('\nWhat will '+str(poke)+' do? ') 
+
+		choice_is_valid = True
+		if action.lower() == str('tackle'):
+			damage = random.randint(2, 6)
+			if damage >= 4:
+				print("\nCritical Hit!")
+			input("\n"+str(poke)+" used Tackle! (Press Enter)")
+			os.system('clear')
+		elif action.lower() == str('growl'):
+			damage = random.randint(4, 5)
+			input("\n"+str(poke)+" used Growl! (Press Enter)")
+			os.system('clear')
+		elif action.lower() == str('vine whip'):
+			damage = random.randint(6, 9)
+			if damage >= 8:
+				print("\nCritical Hit!")
+			input("\n"+str(poke)+" used Vine Whip! (Press Enter)")
+			os.system('clear')
+		else:
+			input('That\'s not a move! (Press Enter)')
+			choice_is_valid = False
+			os.system('clear')
+	return damage
+	#Contains a loop for error checking.
+	#Many of these functions carry out both a side effect and return a variable, which is bad style.
+
+def moveset2():
+	damage = 0
+	intro12 = ('\n╔================================╗')
+	intro13 = ('\n	SCRATCH		GROWL')
+	intro14 = ('\n')
+	intro15 = ('\n	EMBER	    ----')
+	intro16 = ('\n╚================================╝')
+
+	for l in (intro12, intro13, intro14, intro15, intro16):
+		sys.stdout.write(l)
+		sys.stdout.flush()
+		time.sleep(0.03)
+
+	choice_is_valid = False
+	while not choice_is_valid:
+		action = input('\nWhat will '+str(poke)+' do? ') 
+
+		choice_is_valid = True
+		if action.lower() == str('scratch'):
+			damage = random.randint(2, 5)
+			if damage >= 4:
+				print("\nCritical Hit!")
+			input("\n"+str(poke)+" used Scratch! (Press Enter)")
+			os.system('clear')
+		elif action.lower() == str('growl'):
+			damage = random.randint(4, 5)
+			input("\n"+str(poke)+" used Growl! (Press Enter)")
+			os.system('clear')
+		elif action.lower() == str('ember'):
+			damage = random.randint(6, 10)
+			if damage >= 8:
+				print("\nCritical Hit!")
+			input("\n"+str(poke)+" used Ember! It's super effective! (Press Enter)")
+			os.system('clear')
+		else:
+			input('That\'s not a move! (Press Enter)')
+			choice_is_valid = False
+			os.system('clear')
+	return damage
+	#Contains a loop for error checking.
+
+def weedle():
+	edamage = 0
+	which = random.randint(1, 3)
+	if which == 1:
+		edamage = random.randint(2, 5)
+		if edamage >= 4:
+			print("\nCritical Hit!")
+		input("\nWEEDLE used Poison Sting! (Press Enter)")
+		os.system('clear')
+	elif which == 2:
+		edamage = random.randint(4, 5)
+		input("\nWEEDLE used String Shot! (Press Enter)")
+		os.system('clear')
+	elif which == 3:
+		edamage = random.randint(6, 9)
+		if edamage >= 8:
+			print("\nCritical Hit!")
+		input("\nWEEDLE used Bug Bite! (Press Enter)")
+		os.system('clear')
+	return edamage
+	#Contains a loop for error checking.
+
+#########################################GAME START#################################################
 
 
+intro1 = "                                  ,'\.\n"
+intro2 = "    _.----.        ____         ,'  _\   ___    ___     ____\n"
+intro3 = "_,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.\n"
+intro4 = "\      __    \    '-.  | /   `.  ___    |    \/    |   '-.   \ |  |\n"
+intro5 = " \.    \ \   |  __  |  |/    ,','_  `.  |          | __  |    \|  |\n"
+intro6 = "   \    \/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n"
+intro7 = "    \     ,-'/  /   \    ,'   | \/ / ,`.|         /  /   \  |     |\n"
+intro8 = "     \    \ |   \_/  |   `-.  \    `'  /|  |    ||   \_/  | |\    |\n"
+intro9 = "      \    \ \      /       `-.`.___,-' |  |\  /| \      /  | |   |\n"
+intro10 = "       \    \ `.__,'|  |`-._    `|      |__| \/ |  `.__,'|  | |   |\n"
+intro11 = "        \_.-'       |__|    `-._ |              '-.|     '-.| |   |\n"
+intro12 = "                                `'  ーポケモンー              '-._|\n"
+
+for l in (intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12):
+	sys.stdout.write(l)
+	sys.stdout.flush()
+	time.sleep(0.05)
+# I took inspiration for this "for" loop from a Stack Overflow article (in citations); it adds some delay between the text.
+
+intro = "Welcome to Pokémon!\n"
+for l in intro:
+	sys.stdout.write(l)
+	sys.stdout.flush()
+	time.sleep(0.05)
+
+input('(Press Enter to Continue)')
+
+print('NOTE: While playing this game, please do not use the mouse!')
+#Terminal keeps records of your running program, and only truly "clears" when you restart terminal. 
+#The mouse would allow you to scroll back upwards to check previous parts of the game.
+print('NOTE: Please click Enter only when asked!')
+#I used an uncached input function as a way to stop the program until the player presses "Enter". 
+#It can also proceed with a space, or any other input.
+#The player repeatedly clearing the screen by skipping text is generally their fault, 
+#and I could not find an effective solution to spamming.
+name = input('Player Name: ')
+
+input('(Press Enter to Continue)')
+os.system('clear')
+#Clearing the terminal!
+
+print('Loading...', end='')
+dots = "z Z z Z z Z\n"
+for l in dots:
+	sys.stdout.write(l)
+	sys.stdout.flush()
+	time.sleep(0.2)
+#A programmed wait time for an authentic feel.
+
+print('"Wake up, '+str(name)+'!"')
+ 
+input('(Press Enter to Continue)')
+os.system('clear')
+
+intro1 = "You jolt awake from a terrible dream, grabbing wildly at the air.\n"
+intro2 = "In it, you were being attacked by a giant monster!\n"
+intro3 = "The alarm next to your bed lies silent.\n" 
+intro4 = "Crap.\n" 
+intro5 = "You forgot to set it.\n"
+for l in (intro1, intro2, intro3, intro4, intro5):
+	sys.stdout.write(l)
+	sys.stdout.flush()
+	time.sleep(0.08)
+
+input('(Press Enter to Continue)')
+os.system('clear')
+
+intro1 = "You throw on clothes, grab your bag, and race out the door.\n"
+intro2 = "Today is the day that you meet Professor Ki, a friend of your father’s.\n"
+intro3 = "For some reason, he sent an important-looking letter asking to meet you.\n" 
+for l in (intro1, intro2, intro3):
+	sys.stdout.write(l)
+	sys.stdout.flush()
+	time.sleep(0.08)
+
+choice = (input('Read the letter before you leave?(Y/N) '))
+
+if choice.lower() == str('y') or choice.lower() == str('yes'):
+#Removes case sensitivity.
+	print('You read the letter.')
+	print('    _________ 	Dear '+str(name)+',')
+	intro1 = "   |\  slph /|		I was a good friend of your late father.\n"
+	intro2 = "   | \     / |		Please meet me Friday at my Pokélab on Silph Road.\n"
+	intro3 = "   |  `---'  | 	From,\n"
+	intro4 = "   |__/___\__| 	Professor Ki (木教授)\n"
+
+	for l in (intro1, intro2, intro3, intro4):
+		sys.stdout.write(l)
+		sys.stdout.flush()
+		time.sleep(0.05)
+#A good player will read the letter and find the professor's address! Or they can just guess.
+input('(Press Enter to Continue)')
+os.system('clear')
+
+intro1 = "Panting, you watch the houses fly past you.\n"
+intro2 = "As you stop to catch your breath, you realize something.\n"
+intro3 = "Where exactly was Professor Ki’s office again?...\n" 
+for l in (intro1, intro2, intro3):
+	sys.stdout.write(l)
+	sys.stdout.flush()
+	time.sleep(1)
+#A little more delay for suspenseful effect.
+
+input('(Press Enter to Continue)')
+os.system('clear')
+
+intro1 = "As you scan the intersection, you see three road signs:\n" 
+intro2 = "Nymph Road, Silph Road, and Victory Road.\n"
+intro3 = "You rub your hair furiously, trying to remember which one led to the lab.\n"
+for l in (intro1, intro2, intro3):
+	sys.stdout.write(l)
+	sys.stdout.flush()
+	time.sleep(0.05)
+
+choice_is_valid = False
+while not choice_is_valid:
+#Loop for error checking of correct variable. Worked with Ben Dreier to think up idea for this loop.
+	intro1 = "	_________________________________________\n"
+	intro2 = "	|	.-			    \.  |\n"
+	intro3 = "	|	        VICTORY            -\   |\n"
+	intro4 = "	|	           ^   		        |\n"
+	intro5 = "	|			    	~._     |\n"
+	intro6 = "	| NYMPH			          SILPH |\n"
+	intro7 = "	|   <		                    >   |\n"
+	intro8 = "	|  -_					|\n"
+	intro9 = "	|	 \ (カゲドリ Intersection)--_,	|\n"
+	intro10 = "	|____/__________________________________|\n"
+	#Making ASCII art is fun.
+	for l in (intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10):
+		sys.stdout.write(l)
+		sys.stdout.flush()
+		time.sleep(0.05)
+
+	choice = input('Choose a Road (Nymph, Silph, or Victory): ')
+	os.system('clear')
+
+	choice_is_valid = True
+	if choice.lower() == str('silph') or choice == str('>'):
+		print('You turn down Silph Road.')
+		intro1 = "\nLuckily, your memory of the letter was right; you let out a sigh of relief.\n" 
+		intro2 = "Tucked in a corner is a white, quaint-looking Pokélab.\n"
+		for l in (intro1, intro2):
+			sys.stdout.write(l)
+			sys.stdout.flush()
+			time.sleep(0.05)
+
+		input("Enter Professor Ki's lab? (Press Enter)")
+		os.system('clear')
+
+		intro1 = "You enter quietly, not wanting to disturb.\n"
+		intro2 = "However, as you walk hesitantly through the door, you see a thug with Pokémon\n" 
+		intro3 = "threatening the professor! He is tied up with a sticky web of some kind.\n"
+		intro4 = "You duck out of sight, luckily, only the professor sees you.\n"
+		intro5 = "He gently kicks a metal case across the floor towards you.\n"
+		for l in (intro1, intro2, intro3, intro4, intro5):
+			sys.stdout.write(l)
+			sys.stdout.flush()
+			time.sleep(0.05)
+
+		input("\nOpen case? (Press Enter)")
+		os.system('clear')
+
+		intro = "Inside the steel case are two Pokéballs! Which will you choose? \n"
+		for l in intro:
+			sys.stdout.write(l)
+			sys.stdout.flush()
+			time.sleep(0.02)
+
+		choice_is_valid = False
+		while not choice_is_valid:
+		#Another use of the earlier style of the error checking loop.
+			choice = input('\nChoose a Pokémon (Bulbasaur, Charmander): ')
+
+			choice_is_valid = True
+			if choice.lower() == str('charmander'):
+				print('\nYou picked Charmander (ヒトカゲ) #004, a Fire Type!')
+				poke = str('CHARMANDER')
+			elif choice.lower() == str('bulbasaur'):
+				print('\nYou picked Bulbasaur (フシギダネ) #001, a Grass Type!')
+				poke = str('BULBASAUR')
+			else:
+				input("\nThat's not a Pokémon! Try again... (Press Enter)")
+				choice_is_valid = False
+				os.system('clear')
+
+		intro1 = "\nThe thug hears the sliding of the case and turns towards you!\n" 
+		intro2 = "Without thinking, you throw down the Pokéball, which releases a bright light.\n"
+		for l in (intro1, intro2):
+			sys.stdout.write(l)
+			sys.stdout.flush()
+			time.sleep(0.05)	
+
+		input('(Press Enter to Continue)')
+		os.system('clear')
+
+		intro1 = "────────────────▄███████████▄────────────────\n"
+		intro2 = "─────────────▄███▓▓▓▓▓▓▓▓▓▓▓███▄─────────────\n"
+		intro3 = "────────────███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███────────────\n"
+		intro4 = "───────────██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██───────────\n"
+		intro5 = "──────────██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██──────────\n"
+		intro6 = "─────────██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██─────────\n"
+		intro7 = "────────██▓▓▓▓▓▓▓▓▓███████▓▓▓▓▓▓▓▓▓██────────\n"
+		intro8 = "────────██▓▓▓▓▓▓▓▓██░░░░░██▓▓▓▓▓▓▓▓██────────\n"
+		intro9 = "────────██▓▓▓▓▓▓▓██░░███░░██▓▓▓▓▓▓▓██────────\n"
+		intro10 = "────────███████████░░███░░███████████────────\n"
+		intro11 = "────────██░░░░░░░██░░███░░██░░░░░░░██────────\n"
+		intro12 = "────────██░░░░░░░░██░░░░░██░░░░░░░░██────────\n"
+		intro13 = "─────────██░░░░░░░░███████░░░░░░░░██─────────\n"
+		intro14 = "──────────██░░░░░░░░░░░░░░░░░░░░░██──────────\n"
+		intro15 = "───────────██░░░░░░░░░░░░░░░░░░░██───────────\n"
+		intro16 = "────────────███░░░░░░░░░░░░░░░███────────────\n"
+		intro17 = "─────────────▀███░░░░░░░░░░░███▀─────────────\n"
+		intro18 = "────────────────▀███████████▀────────────────\n"
+
+		for l in (intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12, intro13, intro14, intro15, intro16, intro17, intro18):
+			sys.stdout.write(l)
+			sys.stdout.flush()
+			time.sleep(0.03)
+		#Borrowed ASCII art cited at beginning.
+
+		input("───Let's Battle! (Press Enter to Continue)───")
+		os.system('clear')
+
+		print('WEEDLE♂		    Lv4')
+		print('    hp: ██████████████████████ ')
+		print('╚================================╝')
+		print('   _,           /|')
+		print('/     `.    /"_""`._')
+		print("\_    ./   _\,   (__)")
+		print("   `./-‘'/     `._./'")
+		print("'_.-'   \_    ./'")
+		print("        `''-‘ ")
+		print('			'+str(poke)+'♂		    Lv3')
+		print('			    hp: ██████████████████████ ')
+		print('			╚================================╝')
+		print('╔================================╗')
+		print('	FIGHT		BAG')
+		print('')
+		print('	POKéMON		RUN')
+		print('╚================================╝')
+		#ASCII art is fun.
+		time.sleep(1)
+		#Delay for effect.
+
+		intro = '"Go, '+str(poke)+'!" \n'
+		for l in intro:
+			sys.stdout.write(l)
+			sys.stdout.flush()
+			time.sleep(0.02)
+
+		time.sleep(2)
+		os.system('clear')
+
+		enemyhp = 22
+		playerhp = 22
+		dmg = 0
+		edmg = 0
+		winner = 1
+		#Defining intial values to prevent errors. Health corresponds to number of blocks in health bar.
+		#Damage corresponds to the amount dealt/subtracted from health each turn.
+
+		if poke == str('BULBASAUR'):
+			mon = 1
+		else:
+			mon = 2
+		#Which Pokemon is being used?
+
+		while enemyhp > 0 and playerhp > 0:
+			if mon == 1:
+				bulbasaur(poke, playerhp, enemyhp, dmg, edmg)
+				fight()
+				bulbasaur(poke, playerhp, enemyhp, dmg, edmg)
+				dmg = moveset1()
+				enemyhp -= dmg
+				if enemyhp <= 0:
+					winner = 1
+					break
+				bulbasaur(poke, playerhp, enemyhp, dmg, edmg)
+				edmg = weedle()
+				playerhp -= edmg
+				if playerhp <= 0:
+					winner = 0
+				#Control Flow:
+			#1) Prints Bulbasaur screen, including updating health variables.
+			#2) Asks to fight (the only option), includes error checking loop. Clears.
+			#3) Prints Bulbasaur screen again.
+			#4) Asks for move, error checking loop, returns damage value "dmg".
+			#5) Subtracts damage from enemy health.
+			#6) Checks if enemy is dead, if so, exit loop and store winner as player.
+			#7) Prints Bulbasaur screen, including updating health variables.
+			#8) Random damage dealt by NPU.
+			#9) Subtracts enemy damage from player health.
+			#10) Checks if you are dead, if so, store winner as enemy.
+
+			elif mon == 2:
+				charmander(poke, playerhp, enemyhp, dmg, edmg)
+				fight()
+				charmander(poke, playerhp, enemyhp, dmg, edmg)
+				dmg = moveset2()
+				enemyhp -= dmg
+				if enemyhp <= 0:
+					winner = 1
+					break
+				charmander(poke, playerhp, enemyhp, dmg, edmg)
+				edmg = weedle()
+				playerhp -= edmg
+				if playerhp <= 0:
+					winner = 0
+		
+		if winner == 1:
+			intro1 = "\nThe thug, defeated, angrily calls his Weedle back into its Pokéball.\n" 
+			intro2 = 'He runs angrily towards you, screaming, "Darn you, kid!"\n'
+			intro3 = '"BANG!"\n'
+			intro4 = "To your surprise, he falls to the ground, unconcious.\n"
+			intro5 = "A smiling Professor Ki stands behind him sheepishly, with a folding chair.\n"
+			for l in (intro1, intro2, intro3, intro4, intro5):
+				sys.stdout.write(l)
+				sys.stdout.flush()
+				time.sleep(0.05)	
+
+			input('(Press Enter to Continue)')
+			os.system('clear')
+
+			intro1 = "\nLaughing, the professor thanks you.\n" 
+			intro2 = '"Great work with '+poke+', '+name+'! Are you hurt?\n'
+			intro3 = "You shake your head and begin to hand the Pokeball back, but he stops you.\n"
+			intro4 = 'Keep it, '+name+'. You have the beginnings of a Pokemon Master, just like your father.\n'
+			for l in (intro1, intro2, intro3, intro4):
+				sys.stdout.write(l)
+				sys.stdout.flush()
+				time.sleep(0.05)	
+
+			input('(Press Enter to Continue)')
+			os.system('clear')
+
+			intro1 = "                                  ,'\.\n"
+			intro2 = "    _.----.        ____         ,'  _\   ___    ___     ____\n"
+			intro3 = "_,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.\n"
+			intro4 = "\      __    \    '-.  | /   `.  ___    |    \/    |   '-.   \ |  |\n"
+			intro5 = " \.    \ \   |  __  |  |/    ,','_  `.  |          | __  |    \|  |\n"
+			intro6 = "   \    \/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n"
+			intro7 = "    \     ,-'/  /   \    ,'   | \/ / ,`.|         /  /   \  |     |\n"
+			intro8 = "     \    \ |   \_/  |   `-.  \    `'  /|  |    ||   \_/  | |\    |\n"
+			intro9 = "      \    \ \      /       `-.`.___,-' |  |\  /| \      /  | |   |\n"
+			intro10 = "       \    \ `.__,'|  |`-._    `|      |__| \/ |  `.__,'|  | |   |\n"
+			intro11 = "        \_.-'       |__|    `-._ |              '-.|     '-.| |   |\n"
+			intro12 = "                                `'  ーポケモンー              '-._|\n"
+			intro13 = "You win! Congratulations, "+name+"! Thanks for playing.\n"
+
+			for l in (intro1, intro2, intro3, intro4, intro5, intro6, intro7, intro8, intro9, intro10, intro11, intro12, intro13):
+				sys.stdout.write(l)
+				sys.stdout.flush()
+				time.sleep(0.05)
+
+			input('(Press Enter to Continue)')
+			os.system('clear')
+
+		elif winner == 0:
+			intro1 = "\nThe thug smiles, and grabs the briefcase of Pokemon.\n" 
+			intro2 = '"Tough luck, kid," he smirks.\n'
+			intro3 = "His Pokemon traps you in a web of sticky material, before he runs out the door.\n"
+			intro4 = "Game Over.\n"
+			for l in (intro1, intro2, intro3, intro4):
+				sys.stdout.write(l)
+				sys.stdout.flush()
+				time.sleep(0.05)
+
+			input("\nTry again next time... (Press Enter)")
+			os.system('clear')
+
+	elif choice.lower() == str('nymph') or choice == str('<'):
+		print('You turn down Nymph Road.')
+
+		intro1 = "After two hours of walking, you are extremely tired. Why didn't you check the letter?\n" 
+		intro2 = "There's no way you'll ever make it to the professor's office.\n"
+		intro3 = "Game Over.\n"
+		for l in (intro1, intro2, intro3):
+			sys.stdout.write(l)
+			sys.stdout.flush()
+			time.sleep(0.05)
+		input("\nYou chose wrong...play again...(Press Enter)")
+		os.system('clear')
+
+	elif choice.lower() == str('victory') or choice == str('^'):
+		print('You turn down Victory Road.')
+		intro1 = "After two hours of walking, you are extremely tired. Why didn't you check the letter?\n" 
+		intro2 = "There's no way you'll ever make it to the professor's office.\n"
+		intro3 = "Game Over.\n"
+		for l in (intro1, intro2, intro3):
+			sys.stdout.write(l)
+			sys.stdout.flush()
+			time.sleep(0.05)
+		input("\nYou chose wrong...play again...(Press Enter)")
+		os.system('clear')
+
+	else:
+		input("\nThat's not a road! Try again... (Press Enter)")
+		choice_is_valid = False
+		os.system('clear')
+```
