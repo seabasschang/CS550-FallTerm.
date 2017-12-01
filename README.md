@@ -1,8 +1,7 @@
 # CS550 Fall Term Work
-### Sebastian Chang
 
 ## Ventre Program
-> Using core concepts from the term to create a class-based representation of the loveable Choate orchestra director Phil Ventre.
+> Using core concepts from the term to create a class-based representation of the loveable Choate Jazz Band director Phil Ventre, who gives iconic quotes based on his mood. Allows interaction with "Ventre" through a typing game of variable difficulty that can change his mood and then show the user how they did by playing a song (Mueva Los Huesos, Machito, or Told You So) adjusted to reflect how well they did based on a tuning and rythym factor. 
 
 ```python
 import time
