@@ -3,7 +3,7 @@
 ## Ventre Program
 > Using core concepts from the term to create a class-based representation of the loveable Choate Jazz Band director Phil Ventre, who gives iconic quotes based on his mood. Allows interaction with "Ventre" through a typing game of variable difficulty that can change his mood and then show the user how they did by playing a song (Mueva Los Huesos, Machito, or Told You So) adjusted to reflect how well they did based on a tuning and rythym factor. 
 
-####Ventre Program Code:
+#### Ventre Program Code:
 ```python
 import time
 import string
@@ -480,7 +480,7 @@ while loop:
 ## Text-Based Game
 > A Pokémon RPG with both choose-your-own adventure and battle aspects. The game includes several different features, including error checking loops, lowercase functions to make input easier, and room for choice. I wanted to make the game a really fun visual experience, so I incorporated scrolling text, clearing functions, and both adapted and original ASCII art. The art and the control flow of the battle sequence were definitely the hardest to debug and get right, but I'm really satisfied with how it came out.I learned a lot about using loops, incorporating functions, and programming logic/control flow during the project, and I worked really hard to really understand how each aspect of the program really works.
 
-####Text-Based Game Code:
+#### Text-Based Game Code:
 
 ```python
 import time
